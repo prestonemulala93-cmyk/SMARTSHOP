@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: smartshop
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      name: smartshop-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SMARTSHOP_DB_PATH
+        value: /var/data/smartshop.db
+      - key: ADMIN_PASSCODE
+        sync: false
